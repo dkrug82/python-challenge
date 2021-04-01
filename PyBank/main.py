@@ -13,29 +13,38 @@ print("-----------------------")
 
 totalMonthCount = 0
 netTotal = 0
-counter = 0
+change = 0
+lastMonth = 0
+monthlyChange = []
+
 
 with open(budget_data, "r", encoding="utf-8") as csvfile:
     csvReader = csv.reader(csvfile,delimiter=",")
     #print(csvReader)
 
     next(csvfile)
-    #profitLoss = list(csvReader)
-    #totalRows = len(profitLoss)
-
-    #print(totalRows)
-
     for row in csvReader:
         if totalMonthCount == 0:
-            firstValue = row[1]
-        #print(row)
+            firstMonth = row[1]
+            #secondMonth =  int(row[1]) #+ int(row[1])
+
+        
         totalMonthCount = totalMonthCount + 1
         netTotal = netTotal + int(row[1])
-         
-    secondValue = (row[1])
-averageChange = int(firstValue - secondValue)/int(totalMonthCount - 1)
+        
+        change = int(row[1])  - int(lastMonth)
+        monthlyChange.append(change)
+        lastMonth = row[1]
 
-print("Total Months: " + str(totalMonthCount))
-print("Total: $" + str(netTotal))
-print(averageChange)
-#print(lastValue)
+    #monthlyChange.append(change)   
+
+    finalMonth = (row[1])
+    averageChange = (int(finalMonth) - int(firstMonth))/(totalMonthCount - 1)
+
+print(monthlyChange)
+#print(change)
+#print(monthlyChange)
+#print(secondMonth)
+#print("Total Months: " + str(totalMonthCount))
+#print("Total: $" + str(netTotal))
+#print("Average Cange: $" + str(round(averageChange, 2)))
