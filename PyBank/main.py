@@ -32,19 +32,27 @@ with open(budget_data, "r", encoding="utf-8") as csvfile:
         totalMonthCount = totalMonthCount + 1
         netTotal = netTotal + int(row[1])
         
+        #rows 35 through 46 may need to be deleted and start fresh
+
         change = int(row[1])  - int(lastMonth)
-        monthlyChange.append(change)
+        #profitChange = row[0], change
+
+        monthlyChange.append(row[0] + str(change))
+        #monthlyChange.append(change)
+        
         lastMonth = row[1]
 
     #monthlyChange.append(change)   
+    greatestIncrease = max(monthlyChange)
 
+    
     finalMonth = (row[1])
     averageChange = (int(finalMonth) - int(firstMonth))/(totalMonthCount - 1)
 
-print(monthlyChange)
-#print(change)
 #print(monthlyChange)
+#print(change)
 #print(secondMonth)
 #print("Total Months: " + str(totalMonthCount))
 #print("Total: $" + str(netTotal))
 #print("Average Cange: $" + str(round(averageChange, 2)))
+print(greatestIncrease)
