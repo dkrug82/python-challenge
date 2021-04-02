@@ -16,6 +16,8 @@ netTotal = 0
 change = 0
 lastMonth = 0
 monthlyChange = []
+months = []
+
 
 
 with open(budget_data, "r", encoding="utf-8") as csvfile:
@@ -25,34 +27,40 @@ with open(budget_data, "r", encoding="utf-8") as csvfile:
     next(csvfile)
     for row in csvReader:
         if totalMonthCount == 0:
-            firstMonth = row[1]
-            #secondMonth =  int(row[1]) #+ int(row[1])
+            firstMonth = row[1] #for average change
+            
+        totalMonthCount = totalMonthCount + 1 #for total months
+        netTotal = netTotal + int(row[1]) #for total $ amount
 
+        change = int(row[1])  - int(lastMonth) #for greatest increase/decrease
+
+        monthlyChange.append(change) #for greatest increase/decrease
         
-        totalMonthCount = totalMonthCount + 1
-        netTotal = netTotal + int(row[1])
-        
-        #rows 35 through 46 may need to be deleted and start fresh
+        lastMonth = row[1] #for greatest increase/decrease
 
-        change = int(row[1])  - int(lastMonth)
-        #profitChange = row[0], change
+        months.append(row[0]) #for greatest increase/decrease
+   
+    greatestIncrease = max(monthlyChange) #for greatest increase
+    increaseIndex = (monthlyChange.index(greatestIncrease)) #for greatest increase
 
-        monthlyChange.append(row[0] + str(change))
-        #monthlyChange.append(change)
-        
-        lastMonth = row[1]
-
-    #monthlyChange.append(change)   
-    greatestIncrease = max(monthlyChange)
-
+    greatestDecrease = min(monthlyChange)
+    decreaseIndex = (monthlyChange.index(greatestDecrease))
     
-    finalMonth = (row[1])
+    finalMonth = (row[1]) #for average change
     averageChange = (int(finalMonth) - int(firstMonth))/(totalMonthCount - 1)
 
 #print(monthlyChange)
 #print(change)
 #print(secondMonth)
-#print("Total Months: " + str(totalMonthCount))
-#print("Total: $" + str(netTotal))
-#print("Average Cange: $" + str(round(averageChange, 2)))
-print(greatestIncrease)
+#print(greatestIncrease)
+#print(monthIndex)
+#print(greatestDecrease)
+#print(decreaseIndex)
+#print(months[44])
+
+print("Total Months: " + str(totalMonthCount))
+print("Total: $" + str(netTotal))
+print("Average Change: $" + str(round(averageChange, 2)))
+print(f'Greatest Increase in Profits: {months[increaseIndex]} (${greatestIncrease})')
+print(f'Greatest Decrease in Profits: {months[decreaseIndex]} (${greatestDecrease})')
+
