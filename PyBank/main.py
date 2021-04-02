@@ -64,3 +64,14 @@ print("Average Change: $" + str(round(averageChange, 2)))
 print(f'Greatest Increase in Profits: {months[increaseIndex]} (${greatestIncrease})')
 print(f'Greatest Decrease in Profits: {months[decreaseIndex]} (${greatestDecrease})')
 
+
+output_path = os.path.join("analysis", "financial_analysis.txt")
+
+with open(output_path, 'w') as file:
+    file.write("Financial Analysis\n")
+    file.write("-----------------------\n")
+    file.write(f'Total Months: {totalMonthCount}\n')
+    file.write(f'Total: $ {netTotal}\n')
+    file.write(f'Average Change: ${(round(averageChange, 2))}\n')
+    file.write(f'Greatest Increase in Profits: {months[increaseIndex]} (${greatestIncrease})\n')
+    file.write(f'Greatest Decrease in Profits: {months[decreaseIndex]} (${greatestDecrease})\n')
