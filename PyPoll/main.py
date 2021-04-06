@@ -14,15 +14,11 @@ print("-----------------------")
 totalVotes = 0
 candidates = []
 candidateVotes = []
-#voteCount = []
 
 with open(election_data, "r", encoding="utf-8") as csvfile:
     csvReader = csv.reader(csvfile,delimiter=",")
-    #print(csvReader)
-    #candidateVotes = (row[2])
+    
     next(csvfile)
-    
-    
     
     for row in csvReader:
         totalVotes = totalVotes + 1 #for total votes
@@ -50,21 +46,16 @@ with open(election_data, "r", encoding="utf-8") as csvfile:
     otooleyCount = candidateVotes.count(candidates[3])
 
 #Percentage Won
-    khanPercent = round(int(khanCount) / int(totalVotes), 3) * 100
-    correyPercent = round(int(correyCount) / int(totalVotes), 3) * 100
-    liPercent = round(int(liCount) / int(totalVotes),3) * 100
-    otooletPercent = round(int(otooleyCount) / int(totalVotes), 3) * 100
+    khanPercent = round((khanCount) / (totalVotes), 3) * 100
+    correyPercent = round((correyCount) / (totalVotes), 3) * 100
+    liPercent = round((liCount) / (totalVotes), 3) * 100
+    otooletPercent = round((otooleyCount) / (totalVotes), 3) * 100
 
-#print(khanPercent)
 votePercent = [khanPercent, correyPercent, liPercent, otooletPercent]
 voteCount = [khanCount, correyCount, liCount, otooleyCount]
 
 winner = max(voteCount)
 winnerIndex = voteCount.index(winner)
-#print(winner)   
-#candidateResults = {"cand"}
-#electionResults = zip(candidates, votePercent, voteCount)
-
 
 #print(votes)  
 #print(khanCount)
@@ -73,10 +64,23 @@ winnerIndex = voteCount.index(winner)
 #print(candidates)
 print(f"Total Votes: {totalVotes}")
 print("-----------------------")
-#print(electionResults)
 print(f'{candidates[0]}: {votePercent[0]}% ({voteCount[0]})')
 print(f'{candidates[1]}: {votePercent[1]}% ({voteCount[1]})')
 print(f'{candidates[2]}: {votePercent[2]}% ({voteCount[2]})')
 print(f'{candidates[3]}: {votePercent[3]}% ({voteCount[3]})')
 print("-----------------------")
 print(f'Winner: {candidates[winnerIndex]}')
+
+#output_path = os.path.join("analysis", "election_results.txt")
+
+#with open(output_path, 'w') as file:
+    #file.write('Election Results\n')
+    #file.write("-----------------------\n")
+    #file.write(f"Total Votes: {totalVotes}\n")
+    #file.write("-----------------------\n")
+    #file.write(f'{candidates[0]}: {votePercent[0]}% ({voteCount[0]})\n')
+    #file.write(f'{candidates[1]}: {votePercent[1]}% ({voteCount[1]})\n')
+    #file.write(f'{candidates[2]}: {votePercent[2]}% ({voteCount[2]})\n')
+    #file.write(f'{candidates[3]}: {votePercent[3]}% ({voteCount[3]})\n')
+    #file.write("-----------------------\n")
+    #file.write(f'Winner: {candidates[winnerIndex]}')
