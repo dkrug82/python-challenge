@@ -26,18 +26,6 @@ with open(election_data, "r", encoding="utf-8") as csvfile:
         #Candidate List
         candidateVotes.append(row[2])
     [candidates.append(x) for x in candidateVotes if x not in candidates]
-       
-        #if candidateVotes not in candidates:
-    #candidateIndex = len(candidates)
-    #votes = candidateVotes.count([0])
-    #votes = candidateVotes.count(candidateIndex)
-    #print(range(len(candidates)))
-    #for votes in candidates:
-    #votes = candidateVotes.count(candidates)
-    
-        #voteCount.append(votes)
-
-            #candidates.append(candidateVotes)
 
     #Number of votes per candidate
     khanCount = candidateVotes.count(candidates[0])
@@ -46,10 +34,11 @@ with open(election_data, "r", encoding="utf-8") as csvfile:
     otooleyCount = candidateVotes.count(candidates[3])
 
 #Percentage Won
-    khanPercent = round((khanCount) / (totalVotes), 3) * 100
-    correyPercent = round((correyCount) / (totalVotes), 3) * 100
-    liPercent = round((liCount) / (totalVotes), 3) * 100
-    otooletPercent = round((otooleyCount) / (totalVotes), 3) * 100
+    #khanPercent = round((khanCount) / (totalVotes), 3) * 100
+    khanPercent = (khanCount) / (totalVotes) * 100
+    correyPercent = (correyCount) / (totalVotes) * 100
+    liPercent = (liCount) / (totalVotes) * 100
+    otooletPercent = (otooleyCount) / (totalVotes) * 100
 
 votePercent = [khanPercent, correyPercent, liPercent, otooletPercent]
 voteCount = [khanCount, correyCount, liCount, otooleyCount]
@@ -64,23 +53,25 @@ winnerIndex = voteCount.index(winner)
 #print(candidates)
 print(f"Total Votes: {totalVotes}")
 print("-----------------------")
-print(f'{candidates[0]}: {votePercent[0]}% ({voteCount[0]})')
-print(f'{candidates[1]}: {votePercent[1]}% ({voteCount[1]})')
-print(f'{candidates[2]}: {votePercent[2]}% ({voteCount[2]})')
-print(f'{candidates[3]}: {votePercent[3]}% ({voteCount[3]})')
+print(f'{candidates[0]}: {("%.3f" % votePercent[0])}% ({voteCount[0]})')
+print(f'{candidates[1]}: {("%.3f" % votePercent[1])}% ({voteCount[1]})')
+print(f'{candidates[2]}: {("%.3f" % votePercent[2])}% ({voteCount[2]})')
+print(f'{candidates[3]}: {("%.3f" % votePercent[3])}% ({voteCount[3]})')
 print("-----------------------")
 print(f'Winner: {candidates[winnerIndex]}')
+print("-----------------------")
 
-#output_path = os.path.join("analysis", "election_results.txt")
+output_path = os.path.join("analysis", "election_results.txt")
 
-#with open(output_path, 'w') as file:
-    #file.write('Election Results\n')
-    #file.write("-----------------------\n")
-    #file.write(f"Total Votes: {totalVotes}\n")
-    #file.write("-----------------------\n")
-    #file.write(f'{candidates[0]}: {votePercent[0]}% ({voteCount[0]})\n')
-    #file.write(f'{candidates[1]}: {votePercent[1]}% ({voteCount[1]})\n')
-    #file.write(f'{candidates[2]}: {votePercent[2]}% ({voteCount[2]})\n')
-    #file.write(f'{candidates[3]}: {votePercent[3]}% ({voteCount[3]})\n')
-    #file.write("-----------------------\n")
-    #file.write(f'Winner: {candidates[winnerIndex]}')
+with open(output_path, 'w') as file:
+    file.write('Election Results\n')
+    file.write("-----------------------\n")
+    file.write(f"Total Votes: {totalVotes}\n")
+    file.write("-----------------------\n")
+    file.write(f'{candidates[0]}: {("%.3f" % votePercent[0])}% ({voteCount[0]})\n')
+    file.write(f'{candidates[1]}: {("%.3f" % votePercent[1])}% ({voteCount[1]})\n')
+    file.write(f'{candidates[2]}: {("%.3f" % votePercent[2])}% ({voteCount[2]})\n')
+    file.write(f'{candidates[3]}: {("%.3f" % votePercent[3])}% ({voteCount[3]})\n')
+    file.write("-----------------------\n")
+    file.write(f'Winner: {candidates[winnerIndex]}\n')
+    file.write("-----------------------")
